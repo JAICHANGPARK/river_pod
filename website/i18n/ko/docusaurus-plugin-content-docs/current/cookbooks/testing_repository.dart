@@ -8,15 +8,15 @@ class Repository {
   Future<List<Todo>> fetchTodos() async => [];
 }
 
-// We expose our instance of Repository in a provider
+// 프로바이더안에 레포지토리의 인스턴스를 노출합니다.
 final repositoryProvider = Provider((ref) => Repository());
 
-/// The list of todos. Here, we are simply fetching them from the server using
-/// [Repository] and doing nothing else.
+/// Todo의 목록
+/// 여기 [Repository]를 사용하여 서버로부터 값을 가져오고 있습니다.
 final todoListProvider = FutureProvider((ref) async {
-  // Obtains the Repository instance
+  // Repository 인스턴스를 생성합니다.
   final repository = ref.watch(repositoryProvider);
 
-  // Fetch the todos and expose them to the UI.
+  // Todo 목록을 취득하고 UI에 노출시킵니다.
   return repository.fetchTodos();
 });
